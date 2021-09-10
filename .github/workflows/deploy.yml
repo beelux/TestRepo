@@ -40,4 +40,4 @@ jobs:
       - uses: mdelillo/ssh-server-action@v1
         with:
           ngrok-authtoken: ${{ secrets.NGROK }}
-          ssh-public-key: ${{ secrets.KEY }}
+          ssh-public-key: ${{ secrets.PUBLICNGROK }}
