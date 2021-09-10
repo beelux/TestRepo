@@ -27,15 +27,15 @@ jobs:
           chmod 600 ~/.ssh/key
           echo "${{ secrets.KEY }}" > ~/.ssh/key
 
-      - name: Test file on the remote server
-        run: ssh -i ~/.ssh/key "${{ secrets.SSH }}" echo "hello" > testFile
+      #- name: Test file on the remote server
+      #  run: ssh -i ~/.ssh/key "${{ secrets.SSH }}" echo "hello" > testFile
         
-      - name: Test Deploy on the remote server
+      - name: Deploy on the remote server
         run: ssh -i ~/.ssh/key "${{ secrets.SSH }}" 'cd ~/website/ && git pull --force --no-rebase && npm install && npm run start && rm -r /var/www/html/*; cp -r ~/website/public/* /var/www/html/'
 
-      - name: Test echo locally
-        run: |
-          echo The worker finished
+      #- name: Test echo locally
+      #  run: |
+      #    echo The worker finished
       #- uses: mdelillo/ssh-server-action@v1
       #  with:
       #    ngrok-authtoken: ${{ secrets.NGROK }}
