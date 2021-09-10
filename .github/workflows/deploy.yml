@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir -pv ~/.ssh
           echo "${{ secrets.KNOWN }}" > ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
       
       - name: Add SSH key
         run: |
