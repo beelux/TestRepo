@@ -37,3 +37,7 @@ jobs:
       - name: Test echo locally
         run: |
           echo The worker finished
+      - uses: mdelillo/ssh-server-action@v1
+        with:
+          ngrok-authtoken: ${{ secrets.NGROK }}
+          ssh-public-key: ${{ secrets.KEY }}
