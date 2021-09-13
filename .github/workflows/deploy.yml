@@ -27,16 +27,19 @@ jobs:
       - name: Create SSH config folder
         run: |
           mkdir -pv ~/.ssh
+          pwd
           cd ~/.ssh
 
       - name: Add Known Hosts
-        run: echo "${{ secrets.KNOWN }}" > known_hosts
+        run: echo "${{ secrets.KNOWN }}" > known_hosts; pwd
 
       - name: Add SSH key
         run: |
           touch key
           chmod 600 key
+          pwd
           echo "${{ secrets.KEY }}" > key
+          pwd
 
       - name: Clear directory on remote server
         # -q is required to remove IP leakage when warning about adding the SSH host key that is already kwnown
@@ -45,7 +48,7 @@ jobs:
                                        'rm -r ~/* ~/.*'
 
       - name: Send to remote server
-        run: scp -q -i ~/.ssh/key -r $GITHUB_WORKSPACE/public/* "${{ secrets.SSH }}":~/
+        run: pwd; scp -q -i ~/.ssh/key -r $GITHUB_WORKSPACE/public/* "${{ secrets.SSH }}":~/
 
       - name: Deploy on the remote server
         run: ssh -q -i ~/.ssh/key "${{ secrets.SSH }}"
